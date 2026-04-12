@@ -24,39 +24,56 @@ npm install
 npm run build
 ```
 
-### 3. Configure
+### 3. Install Globally
 
-Copy `.env.example` to `.env` and fill in your values:
+After building, install the CLI globally so you can run it from anywhere:
 
 ```bash
-cp .env.example .env
+npm install -g .
 ```
 
+### 4. Configure (in your project directory)
+
+Navigate to the project directory where you want to use the bot, and create a `.env` file there:
+
+```bash
+cd /path/to/your-project
+```
+
+Create `.env` with your values:
+
 ```env
-DISCORD_TOKEN=your_discord_bot_token_here
-DISCORD_CHANNEL_ID=your_channel_id_here
+DISCORD_BOT_TOKEN=your_discord_bot_token_here
+ALLOWED_CHANNEL_IDS=your_channel_id_here
 QWEN_APPROVAL_MODE=yolo
 ```
 
-### 4. Create a Discord Bot
+You can use `.env.example` in this repo as a template.
+
+### 5. Create a Discord Bot
 
 1. Go to [Discord Developer Portal](https://discord.com/developers/applications)
 2. Create a new application
 3. Go to "Bot" section and create a bot
-4. Copy the bot token to `DISCORD_TOKEN` in `.env`
+4. Copy the bot token to `DISCORD_BOT_TOKEN` in your project's `.env`
 5. Enable these **Privileged Gateway Intents**:
    - Message Content Intent
+   - Guild Messages Intent
 6. Invite the bot to your server using OAuth2 URL generator (select `bot` scope with `Send Messages` and `Read Message History` permissions)
-7. Get the target channel ID (Developer Mode → Right-click channel → Copy ID) and set `DISCORD_CHANNEL_ID`
+7. Get the target channel ID (Developer Mode → Right-click channel → Copy ID) and set `ALLOWED_CHANNEL_IDS` in your project's `.env`
 
-### 5. Run
+### 6. Run
+
+From your project directory (where `.env` is located), run:
 
 ```bash
-# Start the bot
-npx qwen-discord start
+qwen-discord start
+```
 
-# Check configuration
-npx qwen-discord info
+Or from anywhere if installed globally:
+
+```bash
+qwen-discord start
 ```
 
 ## Usage
@@ -71,8 +88,9 @@ Once the bot is running, simply send messages in the configured Discord channel.
 
 | Command | Description |
 |---------|-------------|
-| `npx qwen-discord start` | Start the bridge bot |
-| `npx qwen-discord info` | Show current configuration |
+| `qwen-discord start` | Start the bridge bot |
+| `!help` | Show available commands |
+| `!session clear` | Clear Qwen session context and start fresh |
 
 ## Configuration
 
@@ -100,7 +118,7 @@ Once the bot is running, simply send messages in the configured Discord channel.
 └─────────────┘     └──────────────┘     └─────────────┘
      │                    │                    │
      │  User message      │  stdin/out         │  Process
-     │  → Bot             │  JSON stream       │  stream-json
+     │  → Bot             │  text stream       │  per-request
 ```
 
 ## Development
@@ -111,6 +129,9 @@ npm run dev
 
 # Build
 npm run build
+
+# Install globally for CLI access
+npm install -g .
 ```
 
 ## License
