@@ -2,7 +2,7 @@
 
 Bridge AI CLI (Qwen/Gemini) with Discord channels for seamless AI assistant integration.
 
-[English](./README.md) | [한국어](./README.ko.md)
+[English](./README.md) | [한국어](./README.ko.md) | [简体中文](./README.zh.md) | [日本語](./README.ja.md)
 
 ## Features
 

@@ -2,7 +2,7 @@
 
 AI CLI(Qwen/Gemini)를 디스코드 채널과 연결하여 원활한 AI 어시스턴트 통합을 지원합니다.
 
-[English](./README.md) | [한국어](./README.ko.md)
+[English](./README.md) | [한국어](./README.ko.md) | [简体中文](./README.zh.md) | [日本語](./README.ja.md)
 
 ## 주요 기능
 
