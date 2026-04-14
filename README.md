@@ -73,7 +73,7 @@ npm install -g @qwen-code/qwen-code
 
 **For Gemini:**
 ```bash
-npm install -g @anthropic/gemini-cli
+npm install -g @google/gemini-cli
 ```
 
 ### 7. Run
