@@ -44,8 +44,25 @@ export class DiscordBot {
    * Setup Discord event handlers
    */
   private setupEventHandlers(): void {
-    this.client.on('ready', () => {
+    this.client.on('ready', async () => {
       console.log(`[DiscordBot] Logged in as ${this.client.user?.tag}`);
+
+      // Send greeting message to all allowed channels
+      const providerName = this.config.aiProvider === 'gemini' ? 'Gemini' : 'Qwen';
+      for (const channelId of this.config.allowedChannelIds) {
+        try {
+          const channel = await this.client.channels.fetch(channelId);
+          if (channel instanceof TextChannel) {
+            await channel.send(
+              `👋 안녕하세요! **${providerName}** AI 어시스턴트가 연결되었습니다.\n` +
+              `무엇이든 물어보세요. 도움을 드리겠습니다! 🚀`
+            );
+            console.log(`[DiscordBot] Greeting sent to channel ${channelId}`);
+          }
+        } catch (error) {
+          console.error(`[DiscordBot] Failed to send greeting to channel ${channelId}:`, error);
+        }
+      }
     });
 
     this.client.on('messageCreate', (message: Message) => {
